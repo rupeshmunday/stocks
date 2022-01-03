@@ -1,4 +1,6 @@
+const { ListCollectionsCursor } = require("mongodb");
 const mongoose=require("mongoose");
+var passportLocalMongoose = require('passport-local-mongoose')
 
 const userSchema=new mongoose.Schema({
     email:{
@@ -9,7 +11,12 @@ const userSchema=new mongoose.Schema({
     password:{
         type : String,
         required : true,
+    },
+    stocks:{
+        type: Array,
+        required: false
     }
 })
-const Model=new mongoose.model("User",userSchema)
+userSchema.plugin(passportLocalMongoose);
+const Model=new mongoose.model("User",userSchema);
 module.exports=Model;
