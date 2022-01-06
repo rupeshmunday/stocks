@@ -8,7 +8,7 @@ var stockSchema=new mongoose.Schema({
     },
     quotes:{
         date:{
-            type:date,
+            type: Date,
             values:{
                 open: Number,
                 high: Number,
@@ -19,3 +19,4 @@ var stockSchema=new mongoose.Schema({
         }
     }
 })
+module.exports=mongoose.model('Stock',stockSchema);

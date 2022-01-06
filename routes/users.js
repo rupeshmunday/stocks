@@ -1,67 +1,27 @@
 const express=require('express');
 const router= express.Router();
-const User= require('../models/userSchema');
-var passport = require("passport");
-
+const User= require('../models/user');
+const passport = require('passport');
+const userController = require('../controllers/userController');
+//controllers need to be added.
 
 
 // Showing home page
-router.get("/", function (req, res) {
-    res.render('register', {
-        email: '',
-        password: ''    
-    });
-});
+router.get("/", userController.test);
 // Showing secret page
-router.get("/home", isLoggedIn, function (req, res) {
-    res.render("home");
-});
+router.get("/home", userController.home);
 // Showing register form
-router.get("/register", function (req, res) {
-    res.render('register', {
-        email: '',
-        password: ''    
-    });
-});
+router.get("/register", userController.register);
 // Handling user signup
-router.post("/register", function (req, res) {
-    var email = req.body.email;
-    var password = req.body.password;
-    User.register(new User({ email: email }),
-    password, function (err, user) {
-        if (err) {
-            console.log(err);
-            return res.render("register");
-        }
-        passport.authenticate("local")(
-        req, res, function () {
-            req.flash('success', 'You have logged in');
-            res.render("home");
-        });
-    });
-});
+router.post("/register", userController.post_register);
 //Showing login form
-router.get("/login", function (req, res) {
-    res.render('login', {
-        email: '',
-        password: ''     
-    });
-});
+router.get("/login", userController.login);
 //Handling user login
-router.post("/login", passport.authenticate("local", {
-    successRedirect: "/home",
-    failureRedirect: "/login"
-}), function (req, res) {
-
+router.post("/login", function (req, res) {
+    res.send(req.body);
+    // res.send(req.body);
 });
 //Handling user logout
-router.get("/logout", function (req, res) {
-    req.logout();
-    res.redirect("/");
-    });
-    function isLoggedIn(req, res, next) {
-        if (req.isAuthenticated()) return next();
-        res.redirect("/login");
-    }
+router.get("/logout",userController.logout);
 
 module.exports =router;

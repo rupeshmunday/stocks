@@ -1,16 +1,17 @@
-const { request } = require('express');
-var express=require('express');
+var express = require('express');
+const stockController = require('../controllers/stockController');
+const stockModel = require('../models/stock');
 const router = express.Router();
+const userSchema = require('../models/user');
 
 
-router.post('/api/stocks',(req,res)=>{
-    request('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TSCO.LON&outputsize=full&apikey=B0JT9HYQBNUSMJEN',function(error,response,body){
-        console.log('error',error);
-        console.log('statusCode',response && response.statusCode);
-        console.log('body:',body);
-    })
-    res.send({
-        success:true,
-        message:'Its good' 
-    })
-})
+router.post('/api/stocks', stockController.stockView);
+router.post('/api/stocks/buy',(req,res)=>{
+    console.log(stocks.push(req.body.stockWeb));
+});
+router.post('/api/stocks/sell',(req,res)=>{
+    stocks.pop(req.body.stockWeb);
+});
+
+module.exports = router;
+
