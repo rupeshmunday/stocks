@@ -1,11 +1,11 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
-const url="mongodb://localhost/DemoDBex";
+const url = "mongodb://localhost/DemoDBex";
 
-mongoose.connect(url,{
+mongoose.connect(url, {
     useNewUrlParser:true
 })
 const con=mongoose.connection
-con.on('open',()=>{
+con.on('open', ()=>{
     console.log('connected...')
 })

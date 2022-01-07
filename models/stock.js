@@ -1,5 +1,5 @@
 const { ListCollectionsCursor } = require("mongodb");
-const mongoose=require("mongoose");
+const mongoose = require("mongoose");
 
 var stockSchema=new mongoose.Schema({
     symbol:{
@@ -19,4 +19,4 @@ var stockSchema=new mongoose.Schema({
         }
     }
 })
-module.exports=mongoose.model('Stock',stockSchema);
+module.exports = mongoose.model('Stock', stockSchema);

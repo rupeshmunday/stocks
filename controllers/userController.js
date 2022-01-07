@@ -1,20 +1,15 @@
 const user = require('../models/user');
 exports.register = function (req, res) {
+    // var email = req.body.email;
+    // var password = req.body.password;
     res.send({
         email: '',
         password: ''    
     });
 };
 
-exports.test = function (req, res) {
-    res.send( {
-        email: '',
-        password: ''    
-    });
-};
-
 exports.home = function (req, res) {
-    res.send("home");
+    res.send("<p>Hello this is home page</p>");
 };
 
 exports.post_register = function (req, res) {
@@ -30,15 +25,17 @@ exports.post_register = function (req, res) {
 };
 
 exports.login = function (req, res) {
+    var email = req.body.email;
+    var password = req.body.password;
     res.send('login', {
-        email: '',
-        password: ''     
+        email: '',      //req.body.email
+        password: ''    //req.body.password; 
     });
 };
 
 exports.logout =  function (req, res) {
-    req.logout();
-    res.redirect("/");
+    // req.logout();
+    res.redirect("/home");
 };
 
 exports.isLoggedIn = function (req, res, next) {
