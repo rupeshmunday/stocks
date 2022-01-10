@@ -6,16 +6,14 @@ var stockSchema=new mongoose.Schema({
         type: String,
         required:true
     },
-    quotes:{
-        date:{
-            type: Date,
-            values:{
-                open: Number,
-                high: Number,
-                low: Number,
-                close:Number,
-                volume: Number
-            }
+    date:{
+        type: Date,
+        values:{
+            open: Number,
+            high: Number,
+            low: Number,
+            close:Number,
+            volume: Number
         }
     }
 })
