@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
     stocksOwned: [{type: Schema.type.ObjectId, ref: 'userStock' }]
 })
 
-var Stock = new Schema([
+var userStock = new Schema([
     {
         _id: {
             type: Schema.Types.ObjectId,  
