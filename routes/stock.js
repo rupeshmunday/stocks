@@ -1,4 +1,4 @@
-var express = require('express');
+const express = require('express');
 const stockController = require('../controllers/stockController');
 const stockModel = require('../models/stocks');
 const router = express.Router();

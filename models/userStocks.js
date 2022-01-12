@@ -1,16 +1,12 @@
-var mongoose = require('mongoose'); // package import
+const mongoose = require('mongoose'); // package import
 
-var Schema = mongoose.Schema; // Schema class
+const Schema = mongoose.Schema; // Schema class
 
-var userStock = new Schema([
+let userStock = new Schema([
     {
-        stockDetails: [{
+        stockDetails: {
             type: Schema.Types.ObjectId,
             ref: 'stocks'
-        }],
-        itemName: {
-            type: String,
-            required: true
         },
         dateAdded: {
             type: Date,

@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const db = require('./db/conn');
-var usersRouter = require('./routes/users');
-var stockRouter = require('./routes/stock');
-var bodyParser = require("body-parser");
+let usersRouter = require('./routes/users');
+let stockRouter = require('./routes/stock');
+let bodyParser = require("body-parser");
 
 
 app.use(express.json());
