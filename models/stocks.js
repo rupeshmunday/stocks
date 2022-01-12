@@ -1,7 +1,8 @@
 const { ListCollectionsCursor } = require("mongodb");
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-var stockSchema=new mongoose.Schema({
+var stockSchema=new Schema({
     symbol:{
         type: String,
         required:true

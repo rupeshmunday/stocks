@@ -16,11 +16,11 @@ router.get("/register", userController.register);
 router.post("/register", userController.post_register);
 //Showing login form
 router.get("/login", userController.login);
-//Handling user login
-router.post("/login", function (req, res) {
-    res.send(req.body);
-    // res.send(req.body);
-});
+// //Handling user login
+// router.post("/login", function (req, res) {
+//     res.send(req.body);
+//     // res.send(req.body);
+// });
 //Handling user logout
 router.get("/logout", userController.logout);
 
