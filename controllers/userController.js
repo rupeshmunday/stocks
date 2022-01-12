@@ -13,32 +13,19 @@ exports.home = function (req, res) {
 };
 
 exports.post_register = function (req, res) {
-    var email = req.body.email;
-    var password = req.body.password;
-    User.register(new User({ email: email }),
-    password, function (err, user) {
-        if (err) {
-            console.log(err);
-            return res.render("register");
-        }
-    });
+    res.send("Hello registration page")
 };
 
 exports.login = function (req, res) {
-    var email = req.body.email;
-    var password = req.body.password;
-    res.send('login', {
-        email: '',      //req.body.email
-        password: ''    //req.body.password; 
-    });
+    res.send("Hello login page");
 };
 
 exports.logout =  function (req, res) {
-    // req.logout();
+    res.send("Hi logging out");
     res.redirect("/home");
 };
 
-exports.isLoggedIn = function (req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect("/login");
-}
+// exports.isLoggedIn = function (req, res, next) {
+//     if (req.isAuthenticated()) return next();
+//     res.redirect("/login");
+// }
