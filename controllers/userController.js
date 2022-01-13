@@ -13,7 +13,12 @@ exports.home = function (req, res) {
 };
 
 exports.post_register = function (req, res) {
-    res.send("Hello registration page")
+    user.insertMany([{}],(err)=>{
+        if(err){
+            res.send("Error "+err);
+        }
+        res.status(200);
+    });
 };
 
 exports.login = function (req, res) {

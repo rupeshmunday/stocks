@@ -1,40 +1,62 @@
 
 const stockModel = require('../models/stocks');
 const userModel = require('../models/user');
+const userStockModel = require('../models/userStocks');
 
 const request = require('request');
 
 
 exports.getStockPerformance = ( req, res ) => {
-    res.send("Hi i am a single stock performance")
+    userStockModel.findById( req.params.id ,  (err)=>{
+        if(err){
+            res.send("Error "+err);
+        }
+        res.status(200);
+    })
 }
 exports.findStock = ( req , res ) => {
     res.send("Hi search a stock using me");
 }
 exports.stockView = function ( req, res ) {
-    
-    res.send({
-        success:true,
-        message:'Its good' 
-    });
+    userStockModel.find();
 }
 exports.stockBuy =  ( req , res )=>{
-    res.send("Hi stonks bought");
+    userStockModel.insertMany([{_id : req.params.id , quantity: req.params.quantity}] , (err)=>{
+        if(err){
+            res.send("Error "+err);
+        }
+        res.status(200);
+    })
     
 }
 exports.stockSell = ( req , res )=>{
-    res.send("Hi stonks sold");
+    userStockModel.deleteOne({_id : req.params.id , quantity : req.params.quantity} , (err)=>{
+        if(err){
+            res.send("Error "+err);
+        }
+        res.status(200);
+    });
 
 }
 
 //Adding favourite stocks
 exports.addToFavourites = ( req , res ) => {
-    res.send("Hello these are your favourite stonks");
+    userStockModel.insertMany({_id : req.params.id} , (err)=>{
+        if(err){
+            res.send("Error "+err);
+        }
+        res.status(200);
+    })
 }
 
 //Removing favourite stocks
 exports.removeFromFavourites = ( req , res) => {
-    res.send("Stonk removed from favourite list");
+    userStockModel.deleteOne({_id : req.params.id} , (err)=>{
+        if(err){
+            res.send("Error "+err);
+        }
+        res.status(200);
+    })
 }
 
 

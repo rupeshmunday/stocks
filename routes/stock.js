@@ -6,12 +6,12 @@ const userSchema = require('../models/user');
 
 
 router.get('/', stockController.stockView);
-router.get('/:stockID', stockController.getStockPerformance)
+router.get('/:id', stockController.getStockPerformance);
 router.get('/search/:keyword', stockController.findStock);
-router.put('/:stockID/buy', stockController.stockBuy);
-router.delete('/:stockID/sell/:quantity', stockController.stockSell);
-router.post('/:stockID/addToFavourite', stockController.addToFavourites);
-router.delete('/:stockID/removeStock', stockController.removeFromFavourites);
+router.post('/buy/:id/:quantity', stockController.stockBuy);
+router.delete('/:id/sell/:quantity', stockController.stockSell);
+router.post('/:id/addToFavourite', stockController.addToFavourites);
+router.delete('/:id/removeStock', stockController.removeFromFavourites);
 
 module.exports = router;
 
