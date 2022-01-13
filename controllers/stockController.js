@@ -7,11 +7,11 @@ const request = require('request');
 
 
 exports.getStockPerformance = ( req, res ) => {
-    userStockModel.findById( req.params.id ,  (err)=>{
+    userStockModel.findById( req.params.id , (err, userStock) => {
         if(err){
             res.send("Error "+err);
         }
-        res.status(200);
+        res.send( userStock );
     })
 }
 exports.findStock = ( req , res ) => {
@@ -20,21 +20,21 @@ exports.findStock = ( req , res ) => {
 exports.stockView = function ( req, res ) {
     userStockModel.find();
 }
-exports.stockBuy =  ( req , res )=>{
-    userStockModel.insertMany([{_id : req.params.id , quantity: req.params.quantity}] , (err)=>{
+exports.stockBuy =  ( req , res ) => {
+    userStockModel.insertMany([{ _id : req.params.id , quantity: req.params.quantity}] , (err , userStockModel) => {
         if(err){
             res.send("Error "+err);
         }
-        res.status(200);
+        res.send(userStockModel);
     })
     
 }
-exports.stockSell = ( req , res )=>{
-    userStockModel.deleteOne({_id : req.params.id , quantity : req.params.quantity} , (err)=>{
+exports.stockSell = ( req , res ) => {
+    userStockModel.deleteOne({ _id : req.params.id } , (err , userStockModel) => {
         if(err){
             res.send("Error "+err);
         }
-        res.status(200);
+        res.send(userStockModel);
     });
 
 }
@@ -51,12 +51,12 @@ exports.addToFavourites = ( req , res ) => {
 
 //Removing favourite stocks
 exports.removeFromFavourites = ( req , res) => {
-    userStockModel.deleteOne({_id : req.params.id} , (err)=>{
-        if(err){
-            res.send("Error "+err);
+    userStockModel.deleteOne({_id : req.params.id} , ( err , userStockModel)=>{
+        if ( err ) {
+            res.send( "Error "+err );
         }
-        res.status(200);
-    })
+        res.send( userStockModel );
+    });
 }
 
 

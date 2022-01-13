@@ -1,4 +1,5 @@
 const user = require('../models/user');
+const stocks = require('../models/stocks');
 exports.register = function (req, res) {
     // var email = req.body.email;
     // var password = req.body.password;
@@ -9,7 +10,12 @@ exports.register = function (req, res) {
 };
 
 exports.home = function (req, res) {
-    res.send("<p>Hello this is home page</p>");
+    stocks.insertMany([{symbol:"TCS"}], (err ,stocks)=>{
+        if(err){
+            res.send("Error"+err);
+        }
+        res.send(stocks);
+    });
 };
 
 exports.post_register = function (req, res) {

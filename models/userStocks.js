@@ -19,6 +19,6 @@ let userStock = new Schema([
     }
 ]);
 
-let userStocks = mongoose.model('userStock', userStocks); 
+let userStocks = mongoose.model('userStock', userStock); 
 
 module.exports = userStocks;
