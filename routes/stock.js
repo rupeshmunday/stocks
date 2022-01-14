@@ -9,7 +9,7 @@ router.get('/', stockController.stockView);
 router.get('/:id', stockController.getStockPerformance);
 router.get('/search/:keyword', stockController.findStock);
 router.post('/buy/:id/:quantity', stockController.stockBuy);
-router.delete('/sell/:id', stockController.stockSell);
+router.put('/sell/:id/:quantity', stockController.stockSell);
 // router.post('/:id/addToFavourite', stockController.addToFavourites);
 // router.delete('/:id/removeStock', stockController.removeFromFavourites);
 

@@ -10,8 +10,6 @@ const userController = require('../controllers/userController');
 // router.get("/", userController.test);
 // Showing secret page
 router.get("/home", userController.home);
-// Showing register form
-router.get("/register", userController.register);
 // Handling user signup
 router.post("/register", userController.post_register);
 //Showing login form

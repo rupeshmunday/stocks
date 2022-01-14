@@ -1,34 +1,35 @@
-const user = require('../models/user');
-const stocks = require('../models/stocks');
-exports.register = function (req, res) {
-    // var email = req.body.email;
-    // var password = req.body.password;
-    res.send({
-        email: '',
-        password: ''    
-    });
-};
+const User = require('../models/user');
+const Stocks = require('../models/stocks');
+
 
 exports.home = function (req, res) {
-    stocks.insertMany([{symbol:"TCS"}], (err ,stocks)=>{
+    Stocks.create([{symbol: req.body.symbol}], (err ,stocks)=>{
         if(err){
             res.send("Error"+err);
         }
-        res.send(stocks);
+        res.json(stocks);
     });
 };
 
 exports.post_register = function (req, res) {
-    user.insertMany([{}],(err)=>{
+    User.create([{ email: req.body.email , password: req.body.password }] , ( err , user ) => {
         if(err){
-            res.send("Error "+err);
+            console.error("Error"+err);
         }
-        res.status(200);
+        console.error("Error");
+        res.json( user );
     });
 };
 
-exports.login = function (req, res) {
-    res.send("Hello login page");
+exports.login = async function (req, res) {
+    let email = req.body.email;
+    let password = req.body.password;
+    User.find( { email : email , password : password } , (err , user ) => {
+        if (err) {
+            console.error("Error"+err);
+        }
+        res.json(user);
+    });
 };
 
 exports.logout =  function (req, res) {
