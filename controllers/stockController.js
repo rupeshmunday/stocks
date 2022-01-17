@@ -7,17 +7,16 @@ const request = require('request');
 
 
 exports.getStockPerformance = ( req, res ) => {
-    try {
-        Stocks.findById( req.params.id , (err, stocks) => {
-            if( err ) {
-                res.send( "Error " + err );
-            }
-            res.json( stocks )
-        })
-
-    } catch (error) {
-        console.error("Error "+error);
-    }
+    Stocks.findById( req.params.id , (err, stocks) => {
+        if ( err ) { 
+            res.json(err);
+        }
+        try {
+            res.json( stocks );        
+        } catch ( e ) {
+            console.error( e );
+        }
+    });
 }
 exports.findStock = ( req , res ) => {
     try {
@@ -27,28 +26,29 @@ exports.findStock = ( req , res ) => {
     }
 }
 exports.stockView = async function ( req, res ) {
-    try {
-        Userstock.find({} , function ( err , docs ) {
-            if( err ) {
-                res.send( "Error " + err );
-            }
-            res.json( docs );
-        });
-    } catch (error) {
-        console.error("Error "+error);
-    }
+    Userstock.find({} , function ( err , docs ) {
+        if ( err ) { 
+            res.json(err);
+        }
+        try {
+            res.json( docs );        
+        } catch ( e ) {
+            console.error( e );
+        }
+    });
 }
 exports.stockBuy = async ( req , res ) => {
-    try {
-        Userstock.create([{ _id : req.params.id , quantity: req.params.quantity}] , (err , Userstock) => {
-            if( err ) {
-                res.send( "Error " + err );
+        Userstock.create ( [ { _id : req.params.id , quantity: req.params.quantity } ] , ( err , Userstock ) => {
+            if ( err ) { 
+                res.json(err);
             }
-            res.json(Userstock); //create
-        })
-    } catch ( error ) {
-        console.error("Error "+error);
-    }
+            try {
+                res.json( Userstock );        
+            } catch ( e ) {
+                console.error( e );
+            }
+            //create
+        });
     
 }
 exports.stockSell = ( req , res ) => {
@@ -58,18 +58,17 @@ exports.stockSell = ( req , res ) => {
     //     }
     //     res.json(docs);
     // });
-    // console.log(a.quantity);
-    try {
-        Userstock.findByIdAndUpdate({ _id : req.params.id } ,{ $set: { quantity: req.params.quantity }}, ( err , userStockModel ) => {
-            if( err ) {
-                res.send( "Error " + err );
-            }
-            res.json( userStockModel );
-        });
-    } catch ( error ) {
-        console.error("Error "+error);
-    }
-
+    // console.log(a);
+    Userstock.findByIdAndUpdate({ _id : req.params.id } ,{ $set: { quantity: req.params.quantity }}, ( err , userStockModel ) => {
+        if ( err ) { 
+            res.json(err);
+        }
+        try {
+            res.json( userStockModel );        
+        } catch ( e ) {
+            console.error( e );
+        }
+    });
 }
 
 //Adding favourite stocks
