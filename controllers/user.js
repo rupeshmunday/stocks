@@ -3,7 +3,14 @@ const Stocks = require('../models/stocks');
 
 
 exports.home = function (req, res) {
-    Stocks.create([{symbol: req.body.symbol}], (err ,stocks)=>{
+    Stocks.create( [{symbol: req.body.symbol ,
+        date: Date(),
+        open:req.body.open,
+        high:req.body.high,
+        close:req.body.close,
+        low:req.body.low,
+        volume:req.body.volume
+    }] , ( err ,stocks ) => {
         if ( err ) { 
             res.json(err);
         }
@@ -15,8 +22,8 @@ exports.home = function (req, res) {
     });
 };
 
-exports.post_register = function (req, res) {
-    User.create([{ email: req.body.email , password: req.body.password }] , ( err , user ) => {
+exports.register = function (req, res) {
+    User.create([{ name: req.body.name , email: req.body.email , password: req.body.password }] , ( err , user ) => {
         if ( err ) { 
             res.json(err);
         }
@@ -44,7 +51,6 @@ exports.login = async function (req, res) {
 };
 
 exports.logout =  function (req, res) {
-    res.send("Hi logging out");
     res.redirect("/home");
 };
 

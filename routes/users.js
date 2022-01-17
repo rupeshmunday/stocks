@@ -1,8 +1,6 @@
-const express=require('express');
-const router= express.Router();
-const User = require('../models/user');
-const passport = require('passport');
-const userController = require('../controllers/userController');
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/user');
 //controllers need to be added.
 
 
@@ -11,7 +9,7 @@ const userController = require('../controllers/userController');
 // Showing secret page
 router.get("/home", userController.home);
 // Handling user signup
-router.post("/register", userController.post_register);
+router.post("/register", userController.register);
 //Showing login form
 router.get("/login", userController.login);
 // //Handling user login

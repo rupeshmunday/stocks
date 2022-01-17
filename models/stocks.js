@@ -7,15 +7,12 @@ var stockSchema=new Schema({
         type: String,
         required:true
     },
-    date:{
-        type: Date,
-        values:{
-            open: Number,
-            high: Number,
-            low: Number,
-            close:Number,
-            volume: Number
-        }
-    }
+    date: Date,
+    open: Number,
+    high: Number,
+    low: Number,
+    close:Number,
+    volume: Number
 })
+
 module.exports = mongoose.model('Stock', stockSchema);

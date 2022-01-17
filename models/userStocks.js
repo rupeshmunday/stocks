@@ -4,6 +4,10 @@ const Schema = mongoose.Schema; // Schema class
 
 let userStock = new Schema([
     {
+        userDetails:{
+            type: Schema.Types.ObjectId,
+            ref: 'user'
+        },
         stockDetails: {
             type: Schema.Types.ObjectId,
             ref: 'stocks'
