@@ -3,33 +3,45 @@ const Stocks = require('../models/stocks');
 
 
 exports.home = function (req, res) {
-    Stocks.create([{symbol: req.body.symbol}], (err ,stocks)=>{
-        if(err){
-            res.send("Error"+err);
-        }
-        res.json(stocks);
-    });
+    try {
+        Stocks.create([{symbol: req.body.symbol}], (err ,stocks)=>{
+            if(err){
+                res.send("Error"+err);
+            }
+            res.json(stocks);
+        });
+    } catch (error) {
+        console.error("Error "+error);
+    }
 };
 
 exports.post_register = function (req, res) {
-    User.create([{ email: req.body.email , password: req.body.password }] , ( err , user ) => {
-        if(err){
-            console.error("Error"+err);
-        }
-        console.error("Error");
-        res.json( user );
-    });
+    try {
+        User.create([{ email: req.body.email , password: req.body.password }] , ( err , user ) => {
+            if(err){
+                console.error("Error"+err);
+            }
+            console.error("Error");
+            res.json( user );
+        });
+    } catch (error) {
+        console.error("Error"+error);
+    }
 };
 
 exports.login = async function (req, res) {
     let email = req.body.email;
     let password = req.body.password;
-    User.find( { email : email , password : password } , (err , user ) => {
-        if (err) {
-            console.error("Error"+err);
-        }
-        res.json(user);
-    });
+    try {
+        User.find( { email : email , password : password } , (err , user ) => {
+            if (err) {
+                console.error("Error"+err);
+            }
+            res.json(user);
+        });
+    } catch (error) {
+       console.error("Error"+error); 
+    }
 };
 
 exports.logout =  function (req, res) {
