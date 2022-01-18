@@ -35,7 +35,7 @@ exports.register = function (req, res) {
     });
 };
 
-exports.login = async function (req, res) {
+exports.login = function (req, res) {
     let email = req.body.email;
     let password = req.body.password;
     User.find( { email : email , password : password } , (err , user ) => {
