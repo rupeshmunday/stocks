@@ -7,7 +7,7 @@ const userController = require('../controllers/user');
 // Showing home page
 // router.get("/", userController.test);
 // Showing secret page
-router.get("/home", userController.home);
+router.post("/home", userController.home);
 // Handling user signup
 router.post("/register", userController.register);
 //Showing login form

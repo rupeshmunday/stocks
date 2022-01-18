@@ -8,41 +8,38 @@ const request = require('request');
 
 exports.getStockPerformance = ( req, res ) => {
     Stocks.findById( req.params.id , (err, stocks) => {
-        if ( err ) {
-            res.send(" error contact to site admin") 
-            res.status(400); //bad request
-        }
-        try {
-            res.json( stocks );        
-        } catch ( e ) {
-            console.error( e );
-        }
+        if (err) {
+            console.log("Error: While fetching stock " + err);
+            return res.status(500).json({
+              status: "error",
+              message: "Error: Something went wrong. Couldn't fetch stock data ",
+            });
+          }
+        res.json({ status: "success", data: stocks });
     });
 }
 exports.findStock = ( req , res ) => {
     Stocks.find( { symbol: req.params.keyword } , function ( err , docs ) {
-        if ( err ) { 
-            res.send(" error contact to site admin") 
-            res.status(400); //bad request
-        }
-        try {
-            res.json( docs );        
-        } catch ( e ) {
-            console.error( e );
-        }
+        if (err) {
+            console.log("Error: While fetching stock " + err);
+            return res.status(500).json({
+              status: "error",
+              message: "Error: Something went wrong. Couldn't fetch stock data ",
+            });
+          }
+        res.json({ status: "success", data: docs });
     } );
 }
-exports.stockView = async function ( req, res ) {
+exports.stockView = function ( req, res ) {
     Stocks.find({} , function ( err , docs ) {
-        if ( err ) { 
-            res.send(" error contact to site admin") 
-            res.status(400); //bad request
-        }
-        try {
-            res.json( docs );        
-        } catch ( e ) {
-            console.error( e );
-        }
+        if (err) {
+            console.log("Error: While fetching stocks " + err);
+            return res.status(500).json({
+              status: "error",
+              message: "Error: Something went wrong. Couldn't fetch stock data ",
+            });
+          }
+        res.json({ status: "success", data: docs });
     });
 }
 exports.stockBuy = (req , res ) => {
@@ -51,53 +48,41 @@ exports.stockBuy = (req , res ) => {
         userDetails : req.params.id ,
         quantity : req.params.quantity
      }, ( err , Userstock ) => {
-        if ( err ) { 
-            res.send(" error contact to site admin"); 
-            res.status(400); //bad request
-        }
-        try {
-            res.json( Userstock );        
-        } catch ( e ) {
-            console.error( e );
-        }
+        if (err) {
+            console.log("Error: While fetching stock " + err);
+            return res.status(500).json({
+              status: "error",
+              message: "Error: Something went wrong. Couldn't fetch stock data ",
+            });
+          }
+        res.json({ status: "success", data: Userstock });
     });
 }
 
-exports.stockBuyUpdate = async ( req , res ) => {
-        console.log(req.body._id);
+exports.stockBuyUpdate = ( req , res ) => {
         Userstock.findOneAndUpdate ( { userDetails : req.params.id } , { $inc: {quantity : req.params.quantity } } , ( err , Userstock ) => {
-            if ( err ) { 
-                res.send(" error contact to site admin"); 
-                res.status(400); //bad request
-            }
-            try {
-                res.json( Userstock );        
-            } catch ( e ) {
-                console.error( e );
-            }
+            if (err) {
+                console.log("Error: While fetching stock " + err);
+                return res.status(500).json({
+                  status: "error",
+                  message: "Error: Something went wrong. Couldn't fetch stock data ",
+                });
+              }
+            res.json({ status: "success", data: Userstock });
             //create
         });
     
 }
 exports.stockSell = ( req , res ) => {
-    // a=Userstock.findById(req.params.id ,function (err, docs) {
-    //     if (err) {
-    //         console.error(err);
-    //     }
-    //     console.log(res.json(docs));
-    //     return docs;
-    // });
-    // console.log(a.schema.tree.quantity);
     Userstock.findOneAndUpdate({ userDetails : req.params.id } ,{ $inc: { quantity: -(req.params.quantity) }}, ( err , userStockModel ) => {
-        if ( err ) { 
-            res.send(" error contact to site admin"); 
-            res.status(400); //bad request
-        }
-        try {
-            res.json( userStockModel );        
-        } catch ( e ) {
-            console.error( e );
-        }
+        if (err) {
+            console.log("Error: While Selling stocks " + err);
+            return res.status(500).json({
+              status: "error",
+              message: "Error: Something went wrong. Couldn't sell stocks ",
+            });
+          }
+        res.json({ status: "success", data: userStockModel });
     });
 }
 
