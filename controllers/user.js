@@ -50,9 +50,9 @@ exports.login = function (req, res) {
     });
 };
 
-exports.logout =  function (req, res) {
-    res.redirect("/home");
-};
+// exports.logout =  function (req, res) {
+//     res.redirect("/home");
+// };
 
 // exports.isLoggedIn = function (req, res, next) {
 //     if (req.isAuthenticated()) return next();

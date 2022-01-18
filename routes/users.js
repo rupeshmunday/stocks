@@ -11,13 +11,13 @@ router.post("/home", userController.home);
 // Handling user signup
 router.post("/register", userController.register);
 //Showing login form
-router.get("/login", userController.login);
+router.post("/login", userController.login);
 // //Handling user login
 // router.post("/login", function (req, res) {
 //     res.send(req.body);
 //     // res.send(req.body);
 // });
 //Handling user logout
-router.get("/logout", userController.logout);
+// router.get("/logout", userController.logout);
 
 module.exports = router;

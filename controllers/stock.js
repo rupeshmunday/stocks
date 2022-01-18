@@ -60,7 +60,7 @@ exports.stockBuy = (req , res ) => {
 }
 
 exports.stockBuyUpdate = ( req , res ) => {
-        Userstock.findOneAndUpdate ( { userDetails : req.params.id } , { $inc: {quantity : req.params.quantity } } , ( err , Userstock ) => {
+        Userstock.findOneAndUpdate ( { userDetails : req.params.id , stockDetails: req.body.id } , { $inc: {quantity : req.params.quantity } } , ( err , Userstock ) => {
             if (err) {
                 console.log("Error: While fetching stock " + err);
                 return res.status(500).json({
