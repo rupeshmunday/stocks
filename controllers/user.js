@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const Stocks = require('../models/stocks');
-
+const jwt = require("jsonwebtoken");
 
 exports.home = function (req, res) {
     Stocks.create( [{symbol: req.body.symbol ,
@@ -36,9 +36,10 @@ exports.register = function (req, res) {
 };
 
 exports.login = function (req, res) {
-    let email = req.body.email;
-    let password = req.body.password;
-    User.find( { email : email , password : password } , (err , user ) => {
+    let Email = req.body.email;
+    let Password = req.body.password;
+    const accessTokenSecret = "youraccesstokensecret";
+    const user = User.find( { email : Email , password : Password } , (err , user ) => {
         if (err) {
             console.log("Error: While fetching user details " + err);
             return res.status(500).json({
@@ -46,7 +47,17 @@ exports.login = function (req, res) {
               message: "Error: Something went wrong. Couldn't fetch your details from server ",
             });
           }
-        res.json({ status: "success", data: user });
+        else if( typeof(user[0]) === "undefined"){
+          return res.status(403).json({
+            status: "error",
+            message: "Error: Forbidden access wrong email or password",
+          })
+        }
+        else{
+          const accessToken = jwt.sign({ email: Email,  password: Password }, accessTokenSecret);
+          res.json({ status: "success", data: user[0].name});
+        }
+        
     });
 };
 
