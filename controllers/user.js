@@ -54,7 +54,7 @@ exports.login = function (req, res) {
           })
         }
         else{
-          const accessToken = jwt.sign({ email: Email,  password: Password }, accessTokenSecret);
+          const accessToken = jwt.sign({ email: Email,  password: Password }, accessTokenSecret , { expiresin: "20m" });
           res.json({ status: "success", data: user[0].name});
         }
         
