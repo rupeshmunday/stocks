@@ -39,7 +39,7 @@ exports.login = function (req, res) {
     let Email = req.body.email;
     let Password = req.body.password;
     const accessTokenSecret = "youraccesstokensecret";
-    const user = User.find( { email : Email , password : Password } , (err , user ) => {
+    const user = User.findOne( { email : Email , password : Password } , (err , user ) => {
         if (err) {
             console.log("Error: While fetching user details " + err);
             return res.status(500).json({
@@ -47,7 +47,7 @@ exports.login = function (req, res) {
               message: "Error: Something went wrong. Couldn't fetch your details from server ",
             });
           }
-        else if( typeof(user[0]) === "undefined"){
+        else if( user === null ){
           return res.status(403).json({
             status: "error",
             message: "Error: Forbidden access wrong email or password",
@@ -55,7 +55,7 @@ exports.login = function (req, res) {
         }
         else{
           const accessToken = jwt.sign({ email: Email,  password: Password }, accessTokenSecret , { expiresIn: "20m" });
-          res.json({ status: "success", data: user[0].name});
+          res.json({ status: "success", data: user.name});
         }
         
     });
