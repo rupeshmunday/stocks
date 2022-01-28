@@ -54,8 +54,8 @@ exports.login = function (req, res) {
           })
         }
         else{
-          const accessToken = jwt.sign({ email: Email,  password: Password }, accessTokenSecret , { expiresIn: "20m" });
-          res.json({ status: "success", data: user.name});
+          const accessToken = jwt.sign({ email: Email,  password: Password }, accessTokenSecret , { expiresIn: "24h" });
+          res.json({ status: "success", accessToken : accessToken,data : user});
         }
         
     });

@@ -12,7 +12,7 @@ router.post("/home", userController.home);
 // Handling user signup
 router.post("/register", userController.register);
 //Showing login form
-router.post("/login", AuthHelper.authenticateJWT, userController.login);
+router.post("/login", userController.login);
 // //Handling user login
 // router.post("/login", function (req, res) {
 //     res.send(req.body);
