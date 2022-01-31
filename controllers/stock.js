@@ -31,7 +31,7 @@ exports.findStock = ( req , res ) => {
     } );
 }
 exports.stockView = function ( req, res ) {
-    Stocks.find({} , function ( err , docs ) {
+    Stocks.find( {} , function ( err , docs ) {
         if (err) {
             console.log("Error: While fetching stocks " + err);
             return res.status(500).json({
@@ -74,7 +74,7 @@ exports.stockBuyUpdate = ( req , res ) => {
     
 }
 exports.stockSell = ( req , res ) => {
-    Userstock.findOneAndUpdate({ userDetails : req.params.id } ,{ $inc: { quantity: -(req.params.quantity) }}, ( err , userStockModel ) => {
+    Userstock.findOneAndUpdate({ userDetails : req.params.id } ,{ $inc: { quantity: -(req.params.quantity) }},{new:true}, ( err , userStockModel ) => {
         if (err) {
             console.log("Error: While Selling stocks " + err);
             return res.status(500).json({
@@ -84,6 +84,19 @@ exports.stockSell = ( req , res ) => {
           }
         res.json({ status: "success", data: userStockModel });
     });
+}
+
+exports.getUserStock = ( req, res ) => {
+  Userstock.find( { userDetails : req.body.user_id}).distinct('stockDetails' , (err, stocks) => {
+      if (err) {
+          console.log("Error: While fetching stock " + err);
+          return res.status(500).json({
+            status: "error",
+            message: "Error: Something went wrong. Couldn't fetch stock data ",
+          });
+        }
+      res.json({ status: "success", data: stocks });
+  });
 }
 
 

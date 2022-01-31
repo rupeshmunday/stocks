@@ -12,6 +12,7 @@ const AuthHelper = require('../helper/Auth');
 
 router.get('/', AuthHelper.authenticateJWT,stockController.stockView);
 router.get('/:id', stockController.getStockPerformance);
+router.post('/loggedIn/userInfo',AuthHelper.authenticateJWT,stockController.getUserStock);
 router.get('/search/:keyword', stockController.findStock);
 router.post('/buy/:id/:quantity', AuthHelper.authenticateJWT ,stockController.stockBuy);
 router.put('/buymore/:id/:quantity', stockController.stockBuyUpdate);
